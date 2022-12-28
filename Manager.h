@@ -24,6 +24,7 @@ public:
     Manager();
     void loadAirports();
     void loadFlights();
+    void loadAirlines();
 };
 
 
