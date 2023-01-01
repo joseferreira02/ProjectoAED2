@@ -13,6 +13,7 @@ Manager::Manager() {
     loadAirports();
     loadFlights();
     loadAirlines();
+    loadCities();
 }
 
 //Loaders
@@ -87,4 +88,48 @@ void Manager::loadAirlines() {
         Airline someairline(code, name, callsign, country);
         airlines.push_back(someairline);
     }
+}
+
+void Manager::loadCities() {
+    string  line;
+    ifstream file;
+
+    file.open("airports.csv");
+    getline(file,line);
+
+    list<Airport> tempAirports;
+    string Code;
+    string Name;
+    string City;
+    string lastCity;
+    string Country;
+    string Latitude;
+    string Longitude;
+    bool isFirst = false;
+
+    while(!file.eof()){
+        if(!getline(file,line)){cities[lastCity] = tempAirports;}
+        istringstream currLine(line);
+
+        //loads each temp variable
+        getline(currLine,Code,',');
+        getline(currLine,Name,',');
+        getline(currLine,City,',');
+        getline(currLine,Country,',');
+        getline(currLine,Latitude,',');
+        getline(currLine,Longitude,',');
+
+        //checks if it's the first element and if it's the same city as the city in the last line
+        if(lastCity!=City&&isFirst){
+            cities[lastCity] = tempAirports;
+            tempAirports.clear();
+            tempAirports.emplace_back(Code,Name,City,Country,stof(Latitude), stof(Longitude));
+        }else{
+            tempAirports.emplace_back(Code,Name,City,Country,stof(Latitude), stof(Longitude));
+        }
+
+        isFirst= true;
+        lastCity = City;
+    }
+
 }

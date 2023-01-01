@@ -8,6 +8,7 @@
 #define PROJETOAED2_MANAGER_H
 
 #include <list>
+#include <unordered_map>
 #include "airport.h"
 #include "airline.h"
 #include "flight.h"
@@ -18,6 +19,7 @@ class Manager {
 
 private:
     AirportHashTable airports;
+    unordered_map<string,list<Airport>> cities;
     list<Airline> airlines;
     list<Flight> flights;
 public:
@@ -25,6 +27,7 @@ public:
     void loadAirports();
     void loadFlights();
     void loadAirlines();
+    void loadCities();
 };
 
 
