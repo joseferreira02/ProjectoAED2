@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/josep/Downloads/ProjectoAED2-master/ProjectoAED2-master/cmake-build-debug"
+			"value" : "c:/Users/Outros/2ndAED_Project/ProjectoAED2/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -643,7 +643,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/josep/Downloads/ProjectoAED2-master/ProjectoAED2-master/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/Outros/2ndAED_Project/ProjectoAED2/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -715,7 +715,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/josep/Downloads/ProjectoAED2-master/ProjectoAED2-master"
+			"value" : "C:/Users/Outros/2ndAED_Project/ProjectoAED2"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1347,7 +1347,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/josep/Downloads/ProjectoAED2-master/ProjectoAED2-master/cmake-build-debug"
+			"value" : "C:/Users/Outros/2ndAED_Project/ProjectoAED2/cmake-build-debug"
 		},
 		{
 			"name" : "projetoAED2_IS_TOP_LEVEL",
@@ -1371,7 +1371,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/josep/Downloads/ProjectoAED2-master/ProjectoAED2-master"
+			"value" : "C:/Users/Outros/2ndAED_Project/ProjectoAED2"
 		}
 	],
 	"kind" : "cache",

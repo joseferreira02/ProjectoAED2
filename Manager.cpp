@@ -72,22 +72,19 @@ void Manager::loadFlights(){
 }
 
 void Manager::loadAirlines() {
-    Airline someairline;
-    ifstream anairline.open("airlines.csv");
+    ifstream anairline;
+    anairline.open("airlines.csv");
     string line;
     getline (anairline, line);
     while(getline(anairline, line)){
         string temp;
         stringstream input(line);
-        getline(input, temp, ',');
-        someairline.setCode(temp);
-        getline(input, temp, ',');
-        someairline.setName(temp);
-        getline(input, temp, ',');
-        someairline.setCallsign(temp);
-        getline(input, temp, ',');
-        someairline.setCountry(temp);
-        getline(input, temp, ',');
-        airlines.push_back(someflight);
+        string code, name, callsign, country;
+        getline(input, code, ',');
+        getline(input, name, ',');
+        getline(input, callsign, ',');
+        getline(input, country, ',');
+        Airline someairline(code, name, callsign, country);
+        airlines.push_back(someairline);
     }
 }

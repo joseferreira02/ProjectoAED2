@@ -1,3 +1,3 @@
-C:/Users/josep/Downloads/ProjectoAED2-master/ProjectoAED2-master/cmake-build-debug/CMakeFiles/projetoAED2.dir
-C:/Users/josep/Downloads/ProjectoAED2-master/ProjectoAED2-master/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/josep/Downloads/ProjectoAED2-master/ProjectoAED2-master/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Outros/2ndAED_Project/ProjectoAED2/cmake-build-debug/CMakeFiles/projetoAED2.dir
+C:/Users/Outros/2ndAED_Project/ProjectoAED2/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Outros/2ndAED_Project/ProjectoAED2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
