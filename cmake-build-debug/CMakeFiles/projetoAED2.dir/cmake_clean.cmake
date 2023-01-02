@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/projetoAED2.dir/Graph.cpp.obj"
+  "CMakeFiles/projetoAED2.dir/Graph.cpp.obj.d"
   "CMakeFiles/projetoAED2.dir/Manager.cpp.obj"
   "CMakeFiles/projetoAED2.dir/Manager.cpp.obj.d"
   "CMakeFiles/projetoAED2.dir/airline.cpp.obj"

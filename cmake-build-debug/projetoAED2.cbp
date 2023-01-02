@@ -82,6 +82,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/ProjectoAED2-master/Graph.cpp">
+			<Option target="projetoAED2"/>
+		</Unit>
+		<Unit filename="C:/ProjectoAED2-master/Graph.h">
+			<Option target="projetoAED2"/>
+		</Unit>
 		<Unit filename="C:/ProjectoAED2-master/Manager.cpp">
 			<Option target="projetoAED2"/>
 		</Unit>

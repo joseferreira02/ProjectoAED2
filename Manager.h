@@ -28,6 +28,8 @@ public:
     void loadFlights();
     void loadAirlines();
     void loadCities();
+    AirportHashTable getAirports();
+    list<Flight> getFlights();
 };
 
 

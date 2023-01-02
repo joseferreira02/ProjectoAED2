@@ -133,3 +133,11 @@ void Manager::loadCities() {
     }
 
 }
+
+AirportHashTable Manager::getAirports() {
+    return airports;
+}
+
+list<Flight> Manager::getFlights() {
+    return flights;
+}
