@@ -2,9 +2,11 @@
 #define PROJETOAED2_FLIGHT_H
 
 #include <string>
+#include <system_error>
+
 using namespace std;
 
-class Flight{
+class Flight : public error_code {
 private:
     string Source;
     string Target;

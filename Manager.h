@@ -28,6 +28,13 @@ public:
     void loadFlights();
     void loadAirlines();
     void loadCities();
+    int countFlightsFromAirport(string airportName);
+    int countUniqueAirlinesFromAirport(string airportName);
+    int countUniqueDestinationsFromAirport(string AirportName);
+    int countUniqueCountriesFromAirport(string AirportName);
+    int countReachableAirports(string AirportName, int maxFlights);
+    int countReachableCities(string AirportName, int maxFlights);
+    int countReachableCountries(string AirportName, int maxFlights);
 };
 
 

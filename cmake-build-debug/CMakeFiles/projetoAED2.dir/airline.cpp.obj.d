@@ -1,5 +1,6 @@
 CMakeFiles/projetoAED2.dir/airline.cpp.obj: \
- C:\ProjectoAED2-master\airline.cpp C:\ProjectoAED2-master\airline.h \
+ C:\Users\Outros\2ndAED_Project\ProjectoAED2\airline.cpp \
+ C:\Users\Outros\2ndAED_Project\ProjectoAED2\airline.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/string \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/c++config.h \
  C:/PROGRA~1/JETBRA~1/CLION2~1.4/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32/bits/os_defines.h \
