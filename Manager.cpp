@@ -14,6 +14,7 @@ Manager::Manager() {
     loadFlights();
     loadAirlines();
     loadCities();
+    listToMap();
 }
 
 //Loaders
@@ -45,6 +46,11 @@ void Manager::loadAirports() {
         getline(currLine,Longitude,',');
 
         airports.insert(Airport(Code,Name,City,Country,stof(Latitude), stof(Longitude)));
+        /*
+        Airport temp =  Airport(Code,Name,City,Country,stof(Latitude), stof(Longitude));
+        pair<string,Airport> tempPair = {Code,temp};
+        tester.insert(tempPair);
+         */
     }
 
 }
@@ -140,4 +146,15 @@ AirportHashTable Manager::getAirports() {
 
 list<Flight> Manager::getFlights() {
     return flights;
+}
+
+FlightMap Manager::getFlightsMap() const {
+    return flightsMap;
+}
+
+
+void Manager::listToMap() {
+    for(const Flight& flight : flights){
+        flightsMap[flight.getSource()].emplace_back(flight.getTarget(),flight.getAirline());
+    }
 }

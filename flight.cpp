@@ -26,14 +26,14 @@ void Flight::setAirline(string s){
     Airline = s;
 }
 
-string Flight::getSource(){
+string Flight::getSource() const{
     return Source;
 }
 
-string Flight::getTarget(){
+string Flight::getTarget() const{
     return Target;
 }
 
-string Flight::getAirline(){
+string Flight::getAirline() const{
     return Airline;
 }

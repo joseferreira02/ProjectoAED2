@@ -12,28 +12,29 @@
 #include "flight.h"
 
 
-struct Edge{
-    Airport airport; //destination
-    string airline; //weight
-};
-
-struct Node{
-    Airport airport;
-    list<Edge> adj;
-    bool  visited;
-};
 
 
-class Graph{
-public:
-    AirportHashTable airports;
+class Graph {
+
+    struct Edge{
+        string dest;
+        string airline;
+    };
+
+    struct Node{
+        string airport;
+        list<Edge> adj;
+        bool visited;
+    };
+
     vector<Node> nodes;
+    unordered_map<string,int> nodeKeys;
 
-private:
-    Graph(Manager manager);
-    void addEdge(Airport airport);
-    void addNode(Airport airport);
-    void addFlight(Airport airportFrom, Airport airportTo, string airline);
+public:
+    Graph(const Manager& manager);
+    void addFlight(const string& airportTo,const string& airportFrom, const string& airline);
+    void addNode(const string& airport);
+    void tester();
 };
 
 
