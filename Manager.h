@@ -33,8 +33,9 @@ public:
     int countUniqueDestinationsFromAirport(string AirportName);
     int countUniqueCountriesFromAirport(string AirportName);
     int countReachableAirports(string AirportName, int maxFlights);
-    int countReachableCities(string AirportName, int maxFlights);
+    int countReachableCities(string startingAirport, int maxFlights);
     int countReachableCountries(string AirportName, int maxFlights);
+    static double distanceUsingHaversine(double lat1, double lon1, double lat2, double lon2);
 };
 
 

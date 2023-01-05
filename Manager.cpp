@@ -7,6 +7,7 @@
 #include <fstream>
 #include <iostream>
 #include <queue>
+#include <cmath>
 
 
 //Constructor
@@ -45,7 +46,7 @@ void Manager::loadAirports() {
         getline(currLine,Longitude,',');
         airports.insert(Airport(Code,Name,City,Country,stof(Latitude), stof(Longitude)));
     }
-
+    file.close();
 }
 
 void Manager::loadFlights(){
@@ -69,6 +70,7 @@ void Manager::loadFlights(){
         someflight.setAirline(temp);
         flights.push_back(someflight);
     }
+    aflight.close();
 }
 
 
@@ -89,6 +91,7 @@ void Manager::loadAirlines() {
         Airline someairline(code, name, callsign, country);
         airlines.push_back(someairline);
     }
+    anairline.close();
 }
 
 void Manager::loadCities() {
@@ -132,7 +135,7 @@ void Manager::loadCities() {
         isFirst= true;
         lastCity = City;
     }
-
+    file.close();
 }
 
 int Manager::countFlightsFromAirport(string airportName) {
@@ -140,8 +143,10 @@ int Manager::countFlightsFromAirport(string airportName) {
     for (Flight flight : flights) {
         if (flight.getSource() == airportName) {
             count++;
+            cout << flight.getSource() << " " << flight.getTarget() << " " << flight.getAirline() << endl;
         }
     }
+    cout << "The total number of flights departing from the airport " << airportName << " is: ";
     return count;
 }
 
@@ -152,6 +157,11 @@ int Manager::countUniqueAirlinesFromAirport(string airportName){
             airlines.insert(flight.getAirline());
         }
     }
+    vector<string> vec(airlines.begin(), airlines.end());
+    for (string x: airlines){
+        cout << x << endl;
+    }
+    cout << "The total number of airlines is ";
     return airlines.size();
 }
 
@@ -162,20 +172,13 @@ int Manager::countUniqueDestinationsFromAirport(string AirportName) {
             destinations.insert(flight.getTarget());
         }
     }
+    for (string x: destinations){
+        cout << x << endl;
+    }
+    cout << "The total number of unique destinations is: ";
     return destinations.size();
 }
-/*
-int Manager::countUniqueCountriesFromAirport(string AirportName) {
-    unordered_set<string> countries;
-    for (Flight flight: flights) {
-        if (flight.getSource() == AirportName) {
-            Airport target = airports[flight.getTarget()];
-            countries.insert(target.getCountry());
-        }
-    }
-    return countries.size();
-}
-*/
+
 int Manager::countUniqueCountriesFromAirport(string AirportName) {
     unordered_set<string> countries;
     for (Flight flight: flights) {
@@ -189,6 +192,10 @@ int Manager::countUniqueCountriesFromAirport(string AirportName) {
             }
         }
     }
+    for (string x: countries){
+        cout << x << endl;
+    }
+    cout << "The total number of unique countries is ";
     return countries.size();
 }
 
@@ -216,39 +223,76 @@ int Manager::countReachableAirports(string AirportName, int maxFlights) {
         }
         flightsProcessed++;
     }
+    for (string x: visitedAirports){
+        cout << x << endl;
+    }
+    cout << "The total number of reachable airports is: ";
     return visitedAirports.size();
 }
 
-int Manager::countReachableCities(string startingCity, int maxFlights) {
+int Manager::countReachableCities(string AirportName, int maxFlights) {
+    unordered_set<string> visitedAirports;
     unordered_set<string> visitedCities;
-    queue<pair<string,int>> citiesToProcess;
-    visitedCities.insert(startingCity);
-    for (Airport airport: cities[startingCity]) {
-        citiesToProcess.push(make_pair(airport.getCity(), 1));
-    }
-    while (!citiesToProcess.empty()) {
-        pair<string,int> currentCity = citiesToProcess.front();
-        citiesToProcess.pop();
-        string city = currentCity.first;
-        int flights = currentCity.second;
-        if (visitedCities.find(city) == visitedCities.end() && flights <= maxFlights) {
-            visitedCities.insert(city);
-            for (Airport airport: cities[city]) {
-                citiesToProcess.push(make_pair(airport.getCity(), flights+1));
-            }
+    queue<Flight> flightsToProcess;
+
+    visitedAirports.insert(AirportName);
+    for (Flight flight: flights) {
+        if (flight.getSource() == AirportName) {
+            flightsToProcess.push(flight);
         }
     }
+    int flightsProcessed = 0;
+    while (!flightsToProcess.empty() && flightsProcessed < maxFlights) {
+        Flight currentFlight = flightsToProcess.front();
+        flightsToProcess.pop();
+        string target = currentFlight.getTarget();
+        if (visitedAirports.find(target) == visitedAirports.end()) {
+            visitedAirports.insert(target);
+            for (Flight flight: flights) {
+                if (flight.getSource() == target) {
+                    flightsToProcess.push(flight);
+                }
+            }
+        }
+        flightsProcessed++;
+    }
+    for (string visitedAirport: visitedAirports) {
+        auto it = airports.begin();
+        while (it != airports.end()) {
+            if (it->getCode() == visitedAirport) {
+                break;
+            }
+            it++;
+        }
+        if (it == airports.end()) {
+            continue;
+        }
+        string city = it->getCity();
+        if (visitedCities.find(city) == visitedCities.end()) {
+            visitedCities.insert(city);
+        }
+    }
+    for (string x: visitedCities){
+        cout << x << endl;
+    }
+    cout << "The total number of reachable cities is: ";
     return visitedCities.size();
 }
 
 int Manager::countReachableCountries(string AirportName, int maxFlights) {
     unordered_set<string> visitedCountries;
     queue<Flight> flightsToProcess;
-    // Find the airport with the given name
-    Airport startingAirport = Airport(AirportName, "", "", "", 0, 0);
-    auto it = airports.find(startingAirport);
+
+    // Find the starting airport
+    auto it = airports.begin();
+    while (it != airports.end()) {
+        if (it->getCode() == AirportName) {
+            break;
+        }
+        it++;
+    }
     if (it == airports.end()) {
-        return -1;  // Airport not found
+        return -1; // Airport not found
     }
 
 // Insert the country of the starting airport into the set of visited countries
@@ -268,8 +312,13 @@ int Manager::countReachableCountries(string AirportName, int maxFlights) {
         flightsToProcess.pop();
 
         // Find the destination airport of the current flight
-        Airport destination = Airport(currentFlight.getTarget(), "", "", "", 0, 0);
-        it = airports.find(destination);
+        it = airports.begin();
+        while (it != airports.end()) {
+            if (it->getCode() == currentFlight.getTarget()) {
+                break;
+            }
+            it++;
+        }
         if (it == airports.end()) {
             continue;  // Airport not found
         }
@@ -281,16 +330,41 @@ int Manager::countReachableCountries(string AirportName, int maxFlights) {
             visitedCountries.insert(targetCountry);
             for (Flight flight: flights) {
                 if (flight.getSource() == currentFlight.getTarget()) {
-                    flightsToProcess.push(flight);
+                    if (flightsProcessed < maxFlights) {
+                        flightsToProcess.push(flight);
+                    }
                 }
             }
         }
 
         flightsProcessed++;
     }
-
+    for (string x: visitedCountries){
+        cout << x << endl;
+    }
+    cout << "The total number of reachable countries is: ";
     return visitedCountries.size();
 }
 
+double deg2rad(double deg) {
+    return deg * (M_PI / 180);
+}
 
+double Manager::distanceUsingHaversine(double lat1, double lon1, double lat2, double lon2) {
+// Convert latitude and longitude to radians
+    lat1 = deg2rad(lat1);
+    lon1 = deg2rad(lon1);
+    lat2 = deg2rad(lat2);
+    lon2 = deg2rad(lon2);
+    // Haversine formula
+    double a = pow(std::sin((lat2 - lat1) / 2), 2) + cos(lat1) * cos(lat2) * pow(std::sin((lon2 - lon1) / 2), 2);
+    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
 
+// Earth's radius in kilometers
+    double r = 6371;
+
+// Distance in kilometers
+    double d = r * c;
+    cout << "The distance, in kilometres, between those 2 coordinates is: ";
+    return d;
+}
