@@ -12,11 +12,11 @@ private:
     string Name;
     string City;
     string Country;
-    float Latitude;
-    float Longitude;
+    double Latitude;
+    double Longitude;
 
 public:
-    Airport(string Code, string Name, string City, string Country, float Latitude, float Longitude);
+    Airport(string Code, string Name, string City, string Country, double Latitude, double Longitude);
     void setCode(string s);
     void setName(string s);
     void setCity(string s);
@@ -27,8 +27,8 @@ public:
     string getName() const;
     string getCity() const;
     string getCountry() const;
-    float getLatitude() const;
-    float getLongitude() const;
+    double getLatitude() const;
+    double getLongitude() const;
 };
 
 struct AirportHash{
