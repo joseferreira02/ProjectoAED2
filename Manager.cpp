@@ -144,7 +144,7 @@ void Manager::loadCities() {
     file.close();
 }
 
-<<<<<<< HEAD
+
 int Manager::countFlightsFromAirport(string airportName) {
     int count = 0;
     for (Flight flight : flights) {
@@ -374,6 +374,7 @@ double Manager::distanceUsingHaversine(double lat1, double lon1, double lat2, do
     double d = r * c;
     cout << "The distance, in kilometres, between those 2 coordinates is: ";
     return d;
+}
 
 AirportHashTable Manager::getAirports() {
     return airports;
