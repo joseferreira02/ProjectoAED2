@@ -1,3 +1,5 @@
+
+
 //
 // Created by jose on 27-12-2022.
 //
@@ -45,7 +47,7 @@ void Manager::loadAirports() {
         getline(currLine,Country,',');
         getline(currLine,Latitude,',');
         getline(currLine,Longitude,',');
-        airports.insert(Airport(Code,Name,City,Country,stof(Latitude), stof(Longitude)));
+        airports.insert(Airport(Code,Name,City,Country,stod(Latitude), stod(Longitude)));
         /*
         Airport temp =  Airport(Code,Name,City,Country,stof(Latitude), stof(Longitude));
         pair<string,Airport> tempPair = {Code,temp};
@@ -133,9 +135,9 @@ void Manager::loadCities() {
         if(lastCity!=City&&isFirst){
             cities[lastCity] = tempAirports;
             tempAirports.clear();
-            tempAirports.emplace_back(Code,Name,City,Country,stof(Latitude), stof(Longitude));
+            tempAirports.emplace_back(Code,Name,City,Country,stod(Latitude), stod(Longitude));
         }else{
-            tempAirports.emplace_back(Code,Name,City,Country,stof(Latitude), stof(Longitude));
+            tempAirports.emplace_back(Code,Name,City,Country,stod(Latitude), stod(Longitude));
         }
 
         isFirst= true;
@@ -352,6 +354,28 @@ int Manager::countReachableCountries(string AirportName, int maxFlights) {
     cout << "The total number of reachable countries is: ";
     return visitedCountries.size();
 }
+
+void Manager::showAirportInformation(string AirportName){
+    bool airportFound = false;
+    for (Airport anairport : airports){
+        if (anairport.getCode() == AirportName) {
+            airportFound = true;
+            cout << "Name : " << anairport.getName() << endl;
+            cout << "City : " << anairport.getCountry() << endl;
+            cout << "Country : " << anairport.getCountry() << endl;
+            cout << "Latitude : " << anairport.getLatitude() << endl;
+            cout << "Longitude : " << anairport.getLongitude() << endl;
+            break;
+        }
+        else{
+            continue;
+        }
+    }
+    if (airportFound == false){
+        cout << "Please enter a valid airport code";
+    }
+}
+
 
 double deg2rad(double deg) {
     return deg * (M_PI / 180);

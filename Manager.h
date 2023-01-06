@@ -1,5 +1,7 @@
 
 
+
+
 //
 // Created by jose on 27-12-2022.
 //
@@ -39,6 +41,7 @@ public:
     int countReachableAirports(string AirportName, int maxFlights);
     int countReachableCities(string startingAirport, int maxFlights);
     int countReachableCountries(string AirportName, int maxFlights);
+    void showAirportInformation(string AirportName);
     static double distanceUsingHaversine(double lat1, double lon1, double lat2, double lon2);
     AirportHashTable getAirports();
     list<Flight> getFlights();
