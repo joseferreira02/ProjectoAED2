@@ -2,7 +2,7 @@
 
 using namespace std;
 
-Airport::Airport(string Code, string Name, string City, string Country, float Latitude, float Longitude){
+Airport::Airport(string Code, string Name, string City, string Country, double Latitude, double Longitude){
     this->Code = Code;
     this->Name = Name;
     this->City = City;
@@ -27,11 +27,11 @@ void Airport::setCountry(string s){
     Country = s;
 }
 
-void Airport::setLatitude(float f){
+void Airport::setLatitude(double f){
     Latitude = f;
 }
 
-void Airport::setLongitude(float f){
+void Airport::setLongitude(double f){
     Longitude = f;
 }
 
@@ -51,11 +51,11 @@ string Airport::getCountry() const {
     return Country;
 }
 
-float Airport::getLatitude() const{
+double Airport::getLatitude() const{
     return Latitude;
 }
 
-float Airport::getLongitude() const{
+double Airport::getLongitude() const{
     return Longitude;
 }
 
