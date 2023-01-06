@@ -103,7 +103,7 @@ void Graph::spAirport(const string& airportFrom , const string& airportTo) {
 
 void Graph::spCity(const string& airportFrom , const string& cityTo) {
     //checks conditions of args
-    if(!isAirport(airportFrom) || !isAirport(cityTo)){cout << "ERROR: introduce existing airport/city";return;}
+    if(!isAirport(airportFrom) || !isCity(cityTo)){cout << "ERROR: introduce existing airport/city";return;}
 
     bfs(airportFrom);
     //finds airport from cityTo with last amount of flights
