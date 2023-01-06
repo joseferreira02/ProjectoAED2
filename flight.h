@@ -17,9 +17,9 @@ public:
     void setSource(string s);
     void setTarget(string s);
     void setAirline(string s);
-    string getSource();
-    string getTarget();
-    string getAirline();
+    string getSource() const;
+    string getTarget() const;
+    string getAirline() const;
 };
 
 #endif

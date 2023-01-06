@@ -128,6 +128,30 @@ projetoAED2/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\projetoAED2.dir\build.make CMakeFiles/projetoAED2.dir/build
 .PHONY : projetoAED2/fast
 
+Graph.obj: Graph.cpp.obj
+.PHONY : Graph.obj
+
+# target to build an object file
+Graph.cpp.obj:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projetoAED2.dir\build.make CMakeFiles/projetoAED2.dir/Graph.cpp.obj
+.PHONY : Graph.cpp.obj
+
+Graph.i: Graph.cpp.i
+.PHONY : Graph.i
+
+# target to preprocess a source file
+Graph.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projetoAED2.dir\build.make CMakeFiles/projetoAED2.dir/Graph.cpp.i
+.PHONY : Graph.cpp.i
+
+Graph.s: Graph.cpp.s
+.PHONY : Graph.s
+
+# target to generate assembly for a file
+Graph.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles\projetoAED2.dir\build.make CMakeFiles/projetoAED2.dir/Graph.cpp.s
+.PHONY : Graph.cpp.s
+
 Manager.obj: Manager.cpp.obj
 .PHONY : Manager.obj
 
@@ -257,6 +281,9 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... projetoAED2
+	@echo ... Graph.obj
+	@echo ... Graph.i
+	@echo ... Graph.s
 	@echo ... Manager.obj
 	@echo ... Manager.i
 	@echo ... Manager.s

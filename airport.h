@@ -34,12 +34,12 @@ public:
 struct AirportHash{
     int operator()(const Airport& airport)const{
 
-        char codeVal = airport.getCode()[0];
-        char nameVal = airport.getName()[0];
-        char cityVal = airport.getCity()[0];
-        char countryVal = airport.getCountry()[0];
+        char codeVal1 = airport.getCode()[0];
+        char codeVal2= airport.getCode()[1];
+        char codeVal3 = airport.getCode()[2];
 
-        return nameVal + codeVal + cityVal + countryVal;
+        return codeVal1*31+codeVal2*32+codeVal3*33;
+
     }
 
     bool operator()(const Airport& airport1,const Airport& airport2)const{

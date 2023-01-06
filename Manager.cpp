@@ -16,6 +16,7 @@ Manager::Manager() {
     loadFlights();
     loadAirlines();
     loadCities();
+    listToMap();
 }
 
 //Loaders
@@ -45,6 +46,11 @@ void Manager::loadAirports() {
         getline(currLine,Latitude,',');
         getline(currLine,Longitude,',');
         airports.insert(Airport(Code,Name,City,Country,stof(Latitude), stof(Longitude)));
+        /*
+        Airport temp =  Airport(Code,Name,City,Country,stof(Latitude), stof(Longitude));
+        pair<string,Airport> tempPair = {Code,temp};
+        tester.insert(tempPair);
+         */
     }
     file.close();
 }
@@ -138,6 +144,7 @@ void Manager::loadCities() {
     file.close();
 }
 
+<<<<<<< HEAD
 int Manager::countFlightsFromAirport(string airportName) {
     int count = 0;
     for (Flight flight : flights) {
@@ -367,4 +374,22 @@ double Manager::distanceUsingHaversine(double lat1, double lon1, double lat2, do
     double d = r * c;
     cout << "The distance, in kilometres, between those 2 coordinates is: ";
     return d;
+
+AirportHashTable Manager::getAirports() {
+    return airports;
+}
+
+list<Flight> Manager::getFlights() {
+    return flights;
+}
+
+FlightMap Manager::getFlightsMap() const {
+    return flightsMap;
+}
+
+
+void Manager::listToMap() {
+    for(const Flight& flight : flights){
+        flightsMap[flight.getSource()].emplace_back(flight.getTarget(),flight.getAirline());
+    }
 }
