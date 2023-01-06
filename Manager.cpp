@@ -376,7 +376,7 @@ double Manager::distanceUsingHaversine(double lat1, double lon1, double lat2, do
     return d;
 }
 
-AirportHashTable Manager::getAirports() {
+AirportHashTable Manager::getAirports() const {
     return airports;
 }
 
@@ -393,4 +393,8 @@ void Manager::listToMap() {
     for(const Flight& flight : flights){
         flightsMap[flight.getSource()].emplace_back(flight.getTarget(),flight.getAirline());
     }
+}
+
+unordered_map<string, list<Airport>> Manager::getCities() const {
+    return cities;
 }

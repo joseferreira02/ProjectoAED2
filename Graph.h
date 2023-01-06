@@ -25,16 +25,30 @@ class Graph {
         string airport;
         list<Edge> adj;
         bool visited;
+        int dist;
+        string lastNode;
     };
 
     vector<Node> nodes;
     unordered_map<string,int> nodeKeys;
+    unordered_map<string,list<Airport>> cities;
+    AirportHashTable airports;
 
 public:
     Graph(const Manager& manager);
     void addFlight(const string& airportTo,const string& airportFrom, const string& airline);
     void addNode(const string& airport);
     void tester();
+    void bfs(const string& source);
+    void spAirport(const string& airportFrom , const string& airportTo);   //shortest path airport
+    void spCity(const string& airportFrom , const string& cityTo);  //shortest path city
+    void spCoordinate(const string& airportFrom ,const int& x ,const int& y,const int& radius);  // shortest path airport to coordinate area given ( x^2 + y^2 <= r2)
+    void citySpAirport(const string& cityFrom , const string& airportTo);
+    void coordinateSpAirport(const string& airportTo ,const int& x ,const int& y,const int& radius);
+    bool isCity(const string& city);  //checks if city exists
+    bool isAirport(const string& airport); // checks if airport exists
+    static void drawPath(vector<string> path ,const int& nrFlights); // draws paths
+    static bool inCircle(const int& x,const int& y ,const int& r ,const int& rx ,const int& ry); // checks if x and y are in circle
 };
 
 
