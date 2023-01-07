@@ -39,6 +39,16 @@ public:
     int countReachableAirports(string AirportName, int maxFlights);
     int countReachableCities(string startingAirport, int maxFlights);
     int countReachableCountries(string AirportName, int maxFlights);
+    int networkAirports();
+    int networkFlights();
+    int networkAirlines();
+    int countryAirports(const string& country);
+    int countryFlights(const string& country);
+    int countryAirlines(const string& country);
+    int airportsUsingAirline(const string& airline);
+    int flightsUsingAirline(const string& airline);
+    int topKAirportsWithMostFlights(int k);
+    int topKAirportsWithMostAirlines(int k);
     static double distanceUsingHaversine(double lat1, double lon1, double lat2, double lon2);
     AirportHashTable getAirports() const;
     list<Flight> getFlights();
