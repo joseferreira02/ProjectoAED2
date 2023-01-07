@@ -10,6 +10,10 @@ int main(){
     Manager manager = Manager();
     Graph graph = Graph(manager);
     int option;
+    string country;
+    string airline;
+    int option2;
+    int k;
     int maxFlights;
     string startingAirport;
     string finalAirport;
@@ -29,6 +33,10 @@ int main(){
         cout << "11 - Check how many cities you can reach with a maximum number of flights and starting at a certain airport" << endl;
         cout << "12 - Check how many countries you can reach with a maximum number of flights and starting at a certain airport" << endl;
         cout << "13 - Information about an airport" << endl;
+        cout << "14 - Network statistics" << endl;
+        cout << "15 - Country statistics" << endl;
+        cout << "16 - Airline statistics" << endl;
+        cout << "17 - Airport statistics" << endl;
         cout << "0 - Quit" << endl;
         cout << "==============================================================" << endl;
 
@@ -135,7 +143,111 @@ int main(){
                 manager.showAirportInformation(startingAirport);
 
                 break;
+            case 14:
+                cout << "1 - Number of airports" << endl;
+                cout << "2 - Number of flights" << endl;
+                cout << "3 - Number of airlines" << endl;
 
+                cin >> option2;
+
+                if (option2 == 1){
+                    cout << endl;
+                    cout << "The number of airports is : " << manager.networkAirports();
+                    cout << endl;
+                }
+                else if (option2 == 2){
+                    cout << endl;
+                    cout << "The number of flights is : " << manager.networkFlights();
+                    cout << endl;
+                }
+                else if (option2 == 3){
+                    cout << endl;
+                    cout << "The number of airlines is : " << manager.networkAirlines();
+                    cout << endl;
+                }
+                else{
+                    cout << "Invalid input, please try again" << endl;
+                }
+                break;
+            case 15:
+                cout << "1 - Number of airports" << endl;
+                cout << "2 - Number of flights" << endl;
+                cout << "3 - Number of airlines" << endl;
+
+                cin >> option2;
+
+                if (option2 == 1){
+                    cout << "Enter the name of the country: " << endl;
+                    cin >> country;
+                    cout << endl;
+                    cout << "The number of airports in this country is : " << manager.countryAirports(country);
+                    cout << endl;
+                }
+                else if (option2 == 2){
+                    cout << "Enter the name of the country: " << endl;
+                    cin >> country;
+                    cout << endl;
+                    cout << "The number of flights in this country is : " << manager.countryFlights(country);
+                    cout << endl;
+                }
+                else if (option2 == 3){
+                    cout << "Enter the name of the country: " << endl;
+                    cin >> country;
+                    cout << endl;
+                    cout << "The number of airlines in this country is : " << manager.countryAirlines(country);
+                    cout << endl;
+                }
+                else{
+                    cout << "Invalid input, please try again" << endl;
+                }
+                break;
+            case 16:
+                cout << "1 - Number of airports" << endl;
+                cout << "2 - Number of flights" << endl;
+
+                cin >> option2;
+
+                if (option2 == 1){
+                    cout << "Enter the name of the airline" << endl;
+                    cin >> airline;
+                    cout << endl;
+                    cout << "The number of airports of this airline is : " << manager.airportsUsingAirline(airline);
+                    cout << endl;
+                }
+                else if (option2 == 2){
+                    cout << "Enter the name of the airline" << endl;
+                    cin >> airline;
+                    cout << endl;
+                    cout << "The number of flights of this airline is : " << manager.flightsUsingAirline(airline);
+                    cout << endl;
+                }
+                else{
+                    cout << "Invalid input, please try again" << endl;
+                }
+                break;
+
+            case 17:
+                cout << "1 - Top airports with the most flights" << endl;
+                cout << "2 - Top airports with the most airlines" << endl;
+
+                cin >> option2;
+
+                if (option2 == 1){
+                    cout << "Enter the number of top airports you would like to view : " << endl;
+                    cin >> k;
+                    cout << endl;
+                    manager.topKAirportsWithMostFlights(k);
+                }
+                else if (option2 == 2){
+                    cout << "Enter the number of top airports you would like to view : " << endl;
+                    cin >> k;
+                    cout << endl;
+                    manager.topKAirportsWithMostAirlines(k);
+                }
+                else{
+                    cout << "Invalid input, please try again" << endl;
+                }
+                break;
             default:
                 cout << "Please enter a valid number" << endl;
                 cout << endl;
