@@ -32,6 +32,7 @@ public:
     void loadFlights();
     void loadAirlines();
     void loadCities();
+    void showAirportInformation(string AirportName);
     int countFlightsFromAirport(string airportName);
     int countUniqueAirlinesFromAirport(string airportName);
     int countUniqueDestinationsFromAirport(string AirportName);
