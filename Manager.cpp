@@ -353,6 +353,27 @@ int Manager::countReachableCountries(string AirportName, int maxFlights) {
     return visitedCountries.size();
 }
 
+void Manager::showAirportInformation(string AirportName){
+    bool airportFound = false;
+    for (Airport anairport : airports){
+        if (anairport.getCode() == AirportName) {
+            airportFound = true;
+            cout << "Name : " << anairport.getName() << endl;
+            cout << "City : " << anairport.getCountry() << endl;
+            cout << "Country : " << anairport.getCountry() << endl;
+            cout << "Latitude : " << anairport.getLatitude() << endl;
+            cout << "Longitude : " << anairport.getLongitude() << endl;
+            break;
+        }
+        else{
+            continue;
+        }
+    }
+    if (airportFound == false){
+        cout << "Please enter a valid airport code";
+    }
+}
+
 double deg2rad(double deg) {
     return deg * (M_PI / 180);
 }
