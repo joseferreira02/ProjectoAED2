@@ -45,6 +45,7 @@ public:
     void spCoordinate(const string& airportFrom ,const int& x ,const int& y,const int& radius);  // shortest path airport to coordinate area given ( x^2 + y^2 <= r2)
     void citySpAirport(const string& cityFrom , const string& airportTo);
     void coordinateSpAirport(const string& airportTo ,const int& x ,const int& y,const int& radius);
+    void showAirportInformation(string AirportName);
     bool isCity(const string& city);  //checks if city exists
     bool isAirport(const string& airport); // checks if airport exists
     static void drawPath(vector<string> path ,const int& nrFlights); // draws paths
