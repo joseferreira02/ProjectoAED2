@@ -397,6 +397,132 @@ double Manager::distanceUsingHaversine(double lat1, double lon1, double lat2, do
     return d;
 }
 
+int Manager::networkAirports() {
+    return airports.size();
+}
+
+int Manager::networkFlights(){
+    return flights.size();
+}
+
+int Manager::networkAirlines() {
+    return airlines.size();
+}
+
+int Manager::countryAirports(const string& country) {
+    int count = 0;
+    for (const Airport& airport: airports){
+        if (airport.getCountry() == country) count++;
+    }
+    return count;
+}
+
+int Manager::countryFlights(const string& country) {
+    // Use a map to store the counts of flights for each country
+    unordered_map<string, int> flightCounts;
+
+    // Iterate through the flights and increment the count for the country of the source airport
+    for (const Flight& flight : flights) {
+        // Find the source airport
+        auto it = airports.begin();
+        while (it != airports.end()) {
+            if (it->getCode() == flight.getSource()) {
+                break;
+            }
+            it++;
+        }
+        if (it == airports.end()) {
+            continue;  // Airport not found
+        }
+
+        // Increment the count for the country of the source airport
+        flightCounts[it->getCountry()]++;
+    }
+
+    // Return the count for the given country
+    return flightCounts[country];
+}
+
+int Manager::countryAirlines(const string& country) {
+    int count = 0;
+    for (Airline airline: airlines){
+        if (airline.getCountry() == country) count++;
+    }
+    return count;
+}
+
+int Manager::airportsUsingAirline(const string& airline) {
+    int count = 0;
+    unordered_set<string> countedAirports;
+    for (const Flight& flight : flights) {
+        if (flight.getAirline() == airline && countedAirports.find(flight.getSource()) == countedAirports.end()) {
+            count++;
+            countedAirports.insert(flight.getSource());
+        }
+    }
+    return count;
+}
+int Manager::flightsUsingAirline(const string& airline) {
+    int count = 0;
+    for (const Flight& flight : flights) {
+        if (flight.getAirline() == airline) {
+            count++;
+        }
+    }
+    return count;
+}
+
+int Manager::topKAirportsWithMostFlights(int k) {
+    // Use a map to store the number of flights for each airport
+    unordered_map<string, int> numFlights;
+    for (const Flight& flight: flights) {
+        numFlights[flight.getSource()]++;
+    }
+
+    // Use a priority queue to find the top-k airports
+    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
+    for (const auto& it: numFlights) {
+        pq.emplace(it.second, it.first);
+        if (pq.size() > k) {
+            pq.pop();
+        }
+    }
+
+    // Print the top-k airports
+    cout << "Top " << k << " airports with the most flights:" << endl;
+    while (!pq.empty()) {
+        pair<int, string> airport = pq.top();
+        pq.pop();
+        cout << airport.second << ": " << airport.first << " flights" << endl;
+    }
+    return k;
+}
+
+int Manager::topKAirportsWithMostAirlines(int k) {
+// Use a map to store the number of airlines for each airport
+    unordered_map<string, int> numAirlines;
+    for (const Flight &flight: flights) {
+        numAirlines[flight.getSource()]++;
+    }
+    // Use a priority queue to find the top-k airports
+    priority_queue<pair<int, string>, vector<pair<int, string>>, greater<pair<int, string>>> pq;
+    for (const auto &it: numAirlines) {
+        pq.emplace(it.second, it.first);
+        if (pq.size() > k) {
+            pq.pop();
+        }
+    }
+
+// Print the top-k airports
+    cout << "Top " << k << " airports with the most airlines:" << endl;
+    while (!pq.empty()) {
+        pair<int, string> airport = pq.top();
+        pq.pop();
+        cout << airport.second << ": " << airport.first << " airlines" << endl;
+    }
+    return k;
+}
+
 AirportHashTable Manager::getAirports() const {
     return airports;
 }
