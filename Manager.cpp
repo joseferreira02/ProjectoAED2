@@ -233,7 +233,7 @@ int Manager::countReachableAirports(string AirportName, int maxFlights) {
     for (string x: visitedAirports){
         cout << x << endl;
     }
-    cout << "The total number of reachable airports is: ";
+    cout << "The total number of reachable airports is: " << visitedAirports.size() << endl;
     return visitedAirports.size();
 }
 
@@ -282,7 +282,7 @@ int Manager::countReachableCities(string AirportName, int maxFlights) {
     for (string x: visitedCities){
         cout << x << endl;
     }
-    cout << "The total number of reachable cities is: ";
+    cout << "The total number of reachable cities is: " << visitedCities.size() << endl;
     return visitedCities.size();
 }
 
@@ -349,7 +349,7 @@ int Manager::countReachableCountries(string AirportName, int maxFlights) {
     for (string x: visitedCountries){
         cout << x << endl;
     }
-    cout << "The total number of reachable countries is: ";
+    cout << "The total number of reachable countries is: " << visitedCountries.size() << endl;
     return visitedCountries.size();
 }
 
