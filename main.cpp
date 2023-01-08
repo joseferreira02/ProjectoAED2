@@ -11,15 +11,19 @@ int main(){
     Graph graph = Graph(manager);
     int option;
     string country;
+    string city;
     string airline;
     int option2;
+    int latitude;
+    int longitude;
+    int radius;
     int k;
     int maxFlights;
     string startingAirport;
     string finalAirport;
     string City;
     do{
-        cout << "==============================================================" << endl;
+        cout << "==========================================================================================================================" << endl;
         cout << "1 - Shortest path between two airports" << endl;
         cout << "2 - Shortest path from an airport to a city" << endl;
         cout << "3 - Shortest path from an airport to certain coordenates" << endl;
@@ -38,11 +42,14 @@ int main(){
         cout << "16 - Airline statistics" << endl;
         cout << "17 - Airport statistics" << endl;
         cout << "0 - Quit" << endl;
-        cout << "==============================================================" << endl;
+        cout << "==========================================================================================================================" << endl;
 
         cin >> option;
 
         switch(option){
+            case 0:
+                break;
+
             case 1:
                 cout << "Enter the airport you would like to begin your flight: ";
                 cin >> startingAirport;
@@ -67,15 +74,45 @@ int main(){
                 break;
 
             case 3:
-
+                cout << "Enter the airport you would like to begin your flight: ";
+                cin >> startingAirport;
+                
+                cout << "Enter the latitude: ";
+                cin >> latitude;
+                
+                cout << "Enter the longitude: ";
+                cin >> longitude;
+                
+                cout << "Enter the desired radius: ";
+                cin >> radius;
+                
+                graph.spCoordinate(startingAirport, latitude, longitude, radius);
                 break;
 
             case 4:
-
+                cout << "Enter the city you would like to begin your flight: ";
+                cin >> city;
+                
+                cout << "Enter the airport you would like to travel to: ";
+                cin >> finalAirport;
+                
+                graph.citySpAirport(city, finalAirport);
                 break;
 
             case 5:
-
+                cout << "Enter the airport you would like to travel to: ";
+                cin >> finalAirport;
+                
+                cout << "Enter your beginning latitude: ";
+                cin >> latitude;
+                
+                cout << "Enter your beginning longitude: ";
+                cin >> longitude;
+                
+                cout << "Enter the radius: ";
+                cin >> radius;
+                
+                graph.coordinateSpAirport(finalAirport, latitude, longitude, radius);
                 break;
 
             case 6:
@@ -250,8 +287,6 @@ int main(){
                 break;
             default:
                 cout << "Please enter a valid number" << endl;
-                cout << endl;
-                break;
         }
     } while (option != 0);
 }
