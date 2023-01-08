@@ -12,13 +12,14 @@ using  namespace std;
 Graph::Graph(const Manager& manager) {
 
     addNode(""); // first useless node
-    FlightMap flights = manager.getFlightsMap();
+    FlightMap flights1 = manager.getFlightsMap();
     cities = manager.getCities();
     airports = manager.getAirports();
-    for(const auto& flight : flights){
+    for(const auto& flight : flights1){
         addNode(flight.first);
         for(const auto& s : flight.second){
             addFlight(flight.first,s.first,s.second);
+            flights.push_back(s.second);
         }
     }
 }
@@ -202,4 +203,132 @@ void Graph::drawPath(vector<string> path,const int& nrFlights) {
 bool Graph::inCircle(const int &x, const int &y, const int &r, const int &rx, const int &ry) {
     double d = pow(x-rx,2) + pow(y-ry,2);
     return d<= pow(r,2);
+}
+
+void Graph::citySpAirport(const string &cityFrom, const string &airportTo) {
+
+    //checks condition
+    if(!isAirport(airportTo) || !isCity(cityFrom)){cout << "ERROR: introduce existing airport/city";return;}
+
+    bfs(airportTo);
+    //gets the airport with lower nr flights
+    string airportFrom;
+    int nrFlights = INT32_MAX;
+    for(const Airport& airport : cities[cityFrom]){
+        if(nrFlights>nodes[nodeKeys[airport.getCode()]].dist){
+            airportFrom = airport.getCode();
+            nrFlights = nodes[nodeKeys[airport.getCode()]].dist;
+        }
+    }
+
+    //resets bfs to wanted path
+    bfs(airportFrom);
+    //uses spAirport logic
+    vector<string> path;
+    string currPos = airportTo;
+    int currKey = nodeKeys[airportTo];
+    while(currPos!=airportFrom){
+        path.push_back(currPos);
+        currPos = nodes[currKey].lastNode;
+        currKey = nodeKeys[currPos];
+        if(currPos.empty()){cout<< "IMPOSSIBLE PATH" ;return;} // Checks if currNODE doest have
+    }
+    if(currPos==airportFrom){path.push_back(airportFrom);}
+
+    //drawing stuff
+    drawPath(path,nrFlights);
+}
+
+void Graph::coordinateSpAirport(const string &airportTo, const int &x, const int &y, const int &radius) {
+
+    if(!isAirport(airportTo)){cout << "ERROR: introduce existing airports";return;}
+
+    //get list of airports in wanted radius
+    list<string> inAirports;
+    for(const auto& a : airports){
+        if(inCircle(a.getLatitude(),a.getLongitude(),radius,x,y))inAirports.push_back(a.getCode());
+    }
+
+    if(inAirports.empty()){cout << "ERROR: introduce existing coordinates";return;}
+
+
+    bfs(airportTo);
+
+    //finds airport by smallest distance to source
+    string smallestFlight;
+    int numFlights = INT32_MAX;
+    for(const string& a : inAirports){
+        if(nodes[nodeKeys[a]].dist<numFlights){
+            smallestFlight = a;
+            numFlights = nodes[nodeKeys[a]].dist;
+        }
+    }
+
+    string airportFrom = smallestFlight;
+    //resets bfs to desired path
+    bfs(airportFrom);
+    //uses spAirport logic
+    vector<string> path;
+    string currPos = airportTo;
+    int currKey = nodeKeys[airportTo];
+    while(currPos!=airportFrom){
+        path.push_back(currPos);
+        currPos = nodes[currKey].lastNode;
+        currKey = nodeKeys[currPos];
+        if(currPos.empty()){cout<< "IMPOSSIBLE PATH" ;return;} // Checks if currNODE doest have
+    }
+    if(currPos==airportFrom){path.push_back(airportFrom);}
+
+    //drawing stuff
+    drawPath(path,numFlights);
+}
+
+
+void Graph::spByAirline(const string &airportFrom, const string &airportTo, const string &airline) {
+    if(!isAirport(airportFrom) || !isAirport(airportTo)){cout << "ERROR: introduce existing airports";return;}
+    if(!isAirline(airline)){cout << "ERROR: introduce existing airline";return;}
+
+    weightedBfs(airportFrom,airline);
+
+    vector<string> path;
+    int nrFlights = nodes[nodeKeys[airportTo]].dist;
+    string currPos = airportTo;
+    int currKey = nodeKeys[airportTo];
+    while(currPos!=airportFrom){
+        path.push_back(currPos);
+        currPos = nodes[currKey].lastNode;
+        currKey = nodeKeys[currPos];
+        if(currPos.empty()){cout<< "IMPOSSIBLE PATH" ;return;} // Checks if currNODE doest have
+    }
+    if(currPos==airportFrom){path.push_back(airportFrom);}
+
+    drawPath(path,nrFlights);
+}
+
+void Graph::weightedBfs(const string &source,const string& airline) {
+    for(Node& node : nodes){node.visited= false;node.dist = -1;node.lastNode = "";}
+    nodes[nodeKeys[source]].visited = true;
+    nodes[nodeKeys[source]].dist = 0;
+
+    //basic bfs
+    queue<string> q;
+    q.push(source);
+    while(!q.empty()){
+        string front = q.front();q.pop();
+        int frontKey = nodeKeys[front];
+        for(const Edge& e : nodes[frontKey].adj ){
+            int neighbourKey = nodeKeys[e.dest];
+            if(!nodes[neighbourKey].visited && e.airline==airline){
+                q.push(e.dest);
+                nodes[neighbourKey].visited = true;
+                nodes[neighbourKey].dist = nodes[frontKey].dist +1;
+                nodes[neighbourKey].lastNode = nodes[frontKey].airport;
+            }
+        }
+    }
+}
+
+bool Graph::isAirline(const string &airline) {
+    for(const string& flight : flights){if(airline==flight)return true;}
+    return false;
 }
